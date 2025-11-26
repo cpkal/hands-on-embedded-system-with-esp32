@@ -25,7 +25,7 @@ void setup() {
   telePrintChatId();
   delay(3000);
 
-  doc["chat_id"] = 1169676864;
+  doc["chat_id"] = 000;
   doc["text"] = "Hello World!";
   serializeJson(doc, message);
   teleSendMessage(message);
@@ -46,7 +46,7 @@ void connectToNetwork() {
 }
 
 void telePrintChatId() {
-  http.begin("https://api.telegram.org/bot8267526762:AAEy8hPSjbrqNTnSuirNvPKVtBz4ni95DJ8/getUpdates");
+  http.begin("https://api.telegram.org/bot-[token]/getUpdates");
   int httpResponseCode = http.GET();
 
   if (httpResponseCode > 0) {
@@ -63,7 +63,7 @@ void telePrintChatId() {
 
 void teleSendMessage(String payload) {
   ESP_LOGI("TELE", "HTTP Payload: %s", payload.c_str());
-  http.begin("https://api.telegram.org/bot8267526762:AAEy8hPSjbrqNTnSuirNvPKVtBz4ni95DJ8/sendMessage");
+  http.begin("https://api.telegram.org/bot-[token]/sendMessage");
   http.addHeader("Content-Type", "application/json");
   int httpResponseCode = http.POST(payload);
 
@@ -77,4 +77,5 @@ void teleSendMessage(String payload) {
   }
 
   http.end();
+
 }
